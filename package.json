@@ -1,0 +1,23 @@
+{
+  "name": "nHdltai",
+  "version": "0.0.1",
+  "description": "Download Batch Dojin From nhentai.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cheerio": "*",
+    "express": "*",
+    "got": "*",
+    "jszip": "*",
+    "request": "*"
+  },
+  "license": "MIT",
+  "keywords": [
+    "nH",
+    "nHtai",
+    "nHentai",
+    "dojin"
+  ]
+}
