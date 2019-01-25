@@ -13,8 +13,9 @@ app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/public/index.html');
 });
 
-app.get("/", (request, response) => {
+app.get("/", (req, request, response) => {
 	response.sendStatus(200);
+	  var hentai = req.params.hentai
 });
 
 app.listen(process.env.PORT);
@@ -36,14 +37,15 @@ request.get('https://cdn.discordapp.com/attachments/368604315465678848/522410032
 });
 */
 
-async function a () {
-  let a = await got("https://nhentai.net/g/211124/")
+async function a (req) {
+  var hentai = req.params.hentai
+  let a = await got(""+hentai+"")
     let a$ = cheerio.load(a.body); 
     let paginas = a$(".gallerythumb").length
     let limitador = paginas + 1
     try {
     for (let i = 1; i < limitador; i++) {
-      let b = await got("https://nhentai.net/g/211124/"+i)
+      let b = await got(""+hentai+""+i)
         let b$ = cheerio.load(b.body); 
         console.log(b$(".fit-horizontal").attr("src"))
     } 
@@ -61,7 +63,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.post("/", async function (req, res) {
-  if(!req.body.hentai.startsWith("https://nhentai.net/g/")) return res.send("Invalid gallery")
+  var hentai = req.params.hentai
+  if(!req.body.hentai.startsWith(""+hentai+"")) return res.send("Invalid gallery")
   let solicitud = req.query.hentai
   var JSZip = require("jszip");
   var zip = new JSZip();
